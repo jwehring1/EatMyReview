@@ -1,0 +1,9 @@
+{% if user_list %}
+<ul>
+{% for user in user_list%}
+  <li><a href="/app/user/{{user.user_id}}/">{{user.user_id}}</a>
+  </li> {% endfor %}
+</ul>
+{% else %}
+  <p> No users found :( </p>
+{% endif %}
