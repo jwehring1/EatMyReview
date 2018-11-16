@@ -7,7 +7,16 @@
   <li><a href="#contact">Contact</a></li>
   <li><a href="#about">About</a></li>
 </ul>
-<img src="/static/images/banner.jpg" >
+
+<video autoplay muted loop id="myVideo">
+  <source src="../media/banner.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<div class="overlay-desc">
+  <h1>Eat My Review</h1>
+</div>
+	 
 {% if user_list %}
 <ul>
 {% for user in user_list%}
@@ -18,7 +27,18 @@
   <p> No users found :( </p>
 
 {% endif %}
+
+
+
+
 <style type="text/css">
+@import url("https://fonts.googleapis.com/css?family=Taviraj:300,400,700,300i,400i,700i");
+body, input, select, textarea {
+		font-family: "Taviraj", serif;
+		font-weight: 300;
+		font-size: 1.5rem;
+		line-height: 1.65;
+	}
 ul {
     list-style-type: none;
     margin: 0;
@@ -45,5 +65,31 @@ li a:hover {
 
 p {
 	text-align: center;
+}
+.center {
+	margin: 0 auto;
+	width: 400px;
+}
+h1 {
+	font-family: "Taviraj", serif;
+	color: white;
+	font-size: 4rem;
+	margin-bottom: 1rem;
+	line-height: 1.5;
+	margin: 0 0 1.5rem 0;
+}
+.overlay-desc {
+	background: rgba(0,0,0,0);
+	position: absolute;
+	top: 20%; right: 0; bottom: 0; left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#myVideo {
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
 }
 </style>
