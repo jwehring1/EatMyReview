@@ -1,6 +1,11 @@
 {% if user %}
   <p>{{user}}</p>
   <p> Reviews: </p>
+  <ul>
+    {% for r in user.review_set.all%}
+      <li>{{r.review_text}}</li>
+    {% endfor %}
+  </ul>
 {% else %}
   <p>Nonexistent user</p>
 {% endif %}
