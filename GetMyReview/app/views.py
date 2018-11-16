@@ -14,7 +14,6 @@ def index(request):
 
 def user_profile(request, id):
     usr = User.objects.filter(user_id=id)[0]
-    print(usr)
     template = loader.get_template('app/profile.html')
     context = {
         "user": usr,
