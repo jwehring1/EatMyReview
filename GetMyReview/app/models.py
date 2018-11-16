@@ -6,8 +6,9 @@ class User(models.Model):
         return "USERID: " + str(self.user_id)
 
 class Review(models.Model):
-    # user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     review_id = models.CharField(max_length = 50)
+    business_id=models.CharField(max_length=50, default='BUSINESS_ID')
     stars = models.IntegerField(default=0)
     review_text = models.CharField(max_length=500)
     def __str__(self):
