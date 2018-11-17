@@ -1,8 +1,16 @@
 {% if review %}
-  <p>Business: {{review.business_id}}</p>
+  <p>Business:
+    <a href="/app/business/{{review.business_id}}">
+      {{review.business_id}}
+    </a>
+  </p>
   <p>Stars: {{review.stars}} </p>
   <p>{{review.review_text}}</p>
-  <p>By: {{review.user.user_id}}</p>
+  <p>By User:
+    <a href="/app/user/{{review.user.user_id}}">
+      {{review.user.user_id}}
+    </a>
+  </p>
   <p>Review ID: {{review.review_id}}</p>
 {% else %}
   <p>Nonexistent user</p>

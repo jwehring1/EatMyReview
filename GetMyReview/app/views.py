@@ -27,3 +27,12 @@ def review_detail(request, review_id):
         "review": r,
     }
     return render(request, 'app/review.html', context)
+
+def business_detail(request, business_id):
+    template = loader.get_template('app/business.html')
+    reviews = Review.objects.filter(business_id=business_id)
+    context = {
+        "business_id": business_id,
+        "reviews": reviews,
+    }
+    return render(request, 'app/business.html', context)

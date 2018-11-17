@@ -1,0 +1,13 @@
+{% if business_id %}
+  <p>Business: {{business_id}}</p>
+  <p> Reviews: </p>
+  <ul>
+    {% for r in reviews%}
+      <li>
+        <a href="/app/review/{{r.review_id}}"> {{r.stars}}/5 {{r.user.user_id}} </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Nonexistent business</p>
+{% endif %}
