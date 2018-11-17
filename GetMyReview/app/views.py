@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import User,Review
+from app.scripts import get_sorted_users_by_reviews
 
 def index(request):
-    user_list = User.objects.all()
-    print(user_list)
+    # user_list = User.objects.all()
+    user_list = get_sorted_users_by_reviews()
     template = loader.get_template('app/index.html')
     context = {
         "user_list":user_list,
