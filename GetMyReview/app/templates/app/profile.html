@@ -3,7 +3,9 @@
   <p> Reviews: </p>
   <ul>
     {% for r in user.review_set.all%}
-      <li>{{r.review_text}}</li>
+      <li>
+        <a href="/app/review/{{r.review_id}}"> {{r.review_text}} </a>
+      </li>
     {% endfor %}
   </ul>
 {% else %}

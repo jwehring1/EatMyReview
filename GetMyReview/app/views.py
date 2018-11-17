@@ -21,4 +21,9 @@ def user_profile(request, id):
     return render(request, 'app/profile.html', context)
 
 def review_detail(request, review_id):
-    return HttpResponse("You're looking at %s" % review_id)
+    r = Review.objects.filter(review_id=review_id)[0]
+    template = loader.get_template('app/review.html')
+    context = {
+        "review": r,
+    }
+    return render(request, 'app/review.html', context)
