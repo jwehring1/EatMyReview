@@ -1,17 +1,31 @@
 {% include "site/menu.html "%}
 {% if review %}
-  <p>Business:
-    <a href="/app/business/{{review.business_id}}">
-      {{review.business_id}}
-    </a>
-  </p>
-  <p>Stars: {{review.stars}} </p>
-  <p>{{review.review_text}}</p>
-  <p>By User:
-    <a href="/app/user/{{review.user.user_id}}">
-      {{review.user.user_id}}
-    </a>
-  </p>
+  <div class="container">
+    <div class="row">
+      <div class = "col-lg-3 offset-lg-3">
+          <p>Business:</p>
+          <p>
+            <a href="/app/business/{{review.business_id}}">
+              {{review.business_id}}
+            </a>
+          </p>
+      </div>
+      <div class = "col-lg-3">
+        <p>By User:</p>
+          <p> <a href="/app/user/{{review.user.user_id}}">
+            {{review.user.user_id}}
+          </a></p>
+      </div>
+    </div>
+    <div style="text-align: center">
+      <p>Stars: {{review.stars}} </p>
+    </div>
+    <div class = "row">
+      <div class = "col-lg-6 offset-lg-3">
+        <p>{{review.review_text}}</p>
+      </div>
+    </div>
+  </div>
   <p>Review ID: {{review.review_id}}</p>
 {% else %}
   <p>Nonexistent user</p>

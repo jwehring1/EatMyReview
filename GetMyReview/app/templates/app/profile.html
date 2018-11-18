@@ -2,16 +2,52 @@
 {% if user %}
   <p>{{user}}</p>
   <p> Reviews: </p>
-  <ul>
-    {% for r in user.review_set.all%}
-      <li>
-        <a href="/app/review/{{r.review_id}}">
-          <p> {{r.stars}}/5 </p>
-          <p> {{r.review_text}} </p>
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+  <div class = "container">
+    <div class="row">
+      <div class = ".col-lg-3 .offset-lg-3">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Stars</th>
+              <th scope="col">Business</th>
+              <th scope="col">Text</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in user.review_set.all %}
+              <tr>
+                <th scope="row">
+                  <a href="/app/review/{{r.review_id}}">
+                    {{r.stars}}
+                  </a>
+                </th>
+                <th scope="row">
+                  <a href="/app/business/{{r.business_id}}">
+                    {{r.business_id}}
+                  </a>
+                </th>
+                <th scope="row">
+                  <a href="/app/review/{{r.review_id}}">
+                    {{r.review_text|slice:":150"}}
+                  </a>
+                </th>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <!-- <ul>
+          {% for r in user.review_set.all%}
+            <li>
+              <a href="/app/review/{{r.review_id}}">
+                <p> {{r.stars}}/5 </p>
+                <p> {{r.review_text}} </p>
+              </a>
+            </li>
+          {% endfor %}
+        </ul> -->
+      </div>
+    </div>
+  </div>
 {% else %}
   <p>Nonexistent user</p>
 {% endif %}
