@@ -17,3 +17,13 @@ def get_sorted_users_by_reviews():
     users.sort(key=lambda x: x[1], reverse=True)
     #return only the list of users
     return [x[0] for x in users]
+
+
+#create LDA categories for the dummy user
+
+
+#cosine similarity between each LDA category for the user
+# and each LDA category for each restaurant
+
+
+#take the highest similarity scores and return these as the ranked results
