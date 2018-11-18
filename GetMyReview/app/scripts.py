@@ -22,8 +22,25 @@ def get_sorted_users_by_reviews():
 #create LDA categories for the dummy user
 
 
-#cosine similarity between each LDA category for the user
+#Jaccard similarity between each LDA category for the user
 # and each LDA category for each restaurant
 
 
 #take the highest similarity scores and return these as the ranked results
+
+
+# similarity between one category from user and one category from restaurant
+# each category is provided as a list
+def jac_sim(user_cat, rest_cat):
+    # intersection starts as 0
+    inters_mag = 0
+    # union starts as size of all terms in user_cat
+    union_mag = len(user_cat)
+    # for each term in rest_cat
+    for j in range(0, len(rest_cat)):
+        if (rest_cat[j] in user_cat):
+            # not a new term
+            union_mag += 1
+        else:
+            #new term
+            inters_mag += 1
