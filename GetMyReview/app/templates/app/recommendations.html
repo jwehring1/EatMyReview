@@ -1,0 +1,10 @@
+{% include "site/menu.html "%}
+{% if reviews %}
+  <ul>
+    {% for r in reviews %}
+      <li> {{r.review_text}}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No reviews found</p>
+{% endif %}

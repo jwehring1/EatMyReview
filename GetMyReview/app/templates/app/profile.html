@@ -1,6 +1,9 @@
 {% include "site/menu.html "%}
 {% if user %}
   <p>{{user}}</p>
+  <div style = "background-color: black; color: white;">
+    <a href="/app/user/{{user.user_id}}/recommendations">Recommendations for this user</a>
+  </div>
   <p> Reviews: </p>
   <div class = "container">
     <div class="row">

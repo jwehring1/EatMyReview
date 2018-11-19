@@ -11,18 +11,11 @@ body, input, select, textarea {
 		/* font-weight: 300; */
 		/* font-size: 1.5rem; */
 		line-height: 1.65;
-    background-color: #333;
-    color: #DDD;
+    background-color: #A9B7C0;
+    color: #000;
 	}
-tr a {
-  display: block;
-}
-tr a:hover {
-  text-decoration: none;
-  color: inherit;
-  background-color: #888;
-}
-ul {
+
+#menu {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -30,11 +23,11 @@ ul {
     background-color: #333;
 }
 
-li {
+#menuItem {
     float: left;
 }
 
-li a {
+#menuItem a {
     display: block;
     color: white;
     text-align: center;
@@ -42,9 +35,50 @@ li a {
     text-decoration: none;
 }
 
-li a:hover {
+#menuItem a:hover {
     background-color: #111;
 }
+
+
+
+#userTable{
+  margin: 0 auto;
+}
+
+#userRow #userItem{
+  font-size: .9em;
+  float:left;
+  padding:10px;
+  width: 18em;
+  background-color:#3C3C3C;
+  border-bottom:1px solid #000;
+  border-right:1px solid #000;
+}
+
+#userTable #userItem:nth-child(7n){
+  background-color:#888;
+  text-color: #D5D5D5;
+}
+
+#userTable #userItem:nth-child(7n+3){
+  background-color:#888;
+}
+
+#userTable #userItem:nth-child(7n+5){
+  background-color:#888;
+}
+
+#userTable #userItem:nth-child(7n+1){
+  clear:both;
+  border-left:1px solid #000;
+  background-color:#888;
+}
+
+#userTable #userItem:nth-child(-n+7){
+  border-top:1px solid #000;
+}
+
+
 
 p {
 	text-align: center;
@@ -61,14 +95,32 @@ h1 {
 	line-height: 1.5;
 	margin: 0 0 1.5rem 0;
 }
-.overlay-desc {
+#overlay-desc {
 	background: rgba(0,0,0,0);
 	position: absolute;
 	top: 20%; right: 0; bottom: 0; left: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	-webkit-animation-duration: 10s;
+            animation-duration: 10s;
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
 }
+@-webkit-keyframes fadeIn {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+         }
+         
+         @keyframes fadeIn {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+         }
+         
+         .fadeIn {
+            -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+         }
 #myVideo {
     right: 0;
     bottom: 0;
@@ -77,9 +129,9 @@ h1 {
 }
 </style>
 
-<ul>
-  <li><a class="active" href="/app/">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
+<ul id=menu>
+  <li id=menuItem><a class="active" href="/app/">Home</a></li>
+  <li id=menuItem><a href="#news">News</a></li>
+  <li id=menuItem><a href="#contact">Contact</a></li>
+  <li id=menuItem><a href="#about">About</a></li>
 </ul>

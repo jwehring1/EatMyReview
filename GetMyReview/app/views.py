@@ -37,3 +37,11 @@ def business_detail(request, business_id):
         "reviews": reviews,
     }
     return render(request, 'app/business.html', context)
+
+def recommendations(request, id ):
+    template = loader.get_template('app/recommendations.html')
+    r = Review.objects.all()
+    context = {
+        "reviews": r,
+    }
+    return render(request, 'app/recommendations.html', context)
