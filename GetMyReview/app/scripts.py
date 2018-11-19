@@ -1,4 +1,5 @@
 from .models import User, Review
+import numpy as np
 
 # sort users by how many reviews they've left
 # returns a list of tuples, with 0 being the user and 1 being the number of reviews
@@ -69,8 +70,14 @@ def jac_user_rest(user_cats, rest_cats):
 #find the best restaurants to recommend
 #gives the best 10 based from Jaccard similarity between LDA categories
 # of the user and all restaurants
-#input: list of user cats, each entry is a list of words; list of restaurants, each entry is a list of
+#input: list of user cats, each entry is a list of words;
+# list of restaurants, each entry is a list of
 # cats, each entry is a list of words
-#output: list of 10 restaurant IDs that are best matches (0=best)
-def best_jacs(user_cats, rest_cats):
+#output: list of 10 indices (wrt rest input list) that are best
+# restaurant matches (0=best)
+def best_jacs(user_cats, all_rest_cats):
     rest_scores = []
+    for r in range(0, len(all_rest_cats)):
+        rest_scores.append(jac_user_rest(user_cats, all_rest_cats[r]))
+    best = np.flip(np.argsort(rest_scores))
+    return best[:10]
