@@ -2,19 +2,19 @@
 {% if review %}
   <div class="container">
     <div class="row">
-      <div class = "col-lg-3 offset-lg-3">
-          <p>Business:</p>
-          <p>
+      <div class = "col-lg-5 offset-lg-1">
+          <h4>Business:</h4>
+          <h2>
             <a href="/app/business/{{review.business_id}}">
               {{review.business_id}}
             </a>
-          </p>
+          </h2>
       </div>
-      <div class = "col-lg-3">
-        <p>By User:</p>
-          <p> <a href="/app/user/{{review.user.user_id}}">
+      <div class = "col-lg-5 offset-lg-1">
+        <h4>By User:</h4>
+          <h2> <a href="/app/user/{{review.user.user_id}}">
             {{review.user.user_id}}
-          </a></p>
+          </a></h2>
       </div>
     </div>
     <div style="text-align: center">
@@ -22,7 +22,7 @@
     </div>
     <div class = "row">
       <div class = "col-lg-6 offset-lg-3">
-        <p>{{review.review_text}}</p>
+        <p style="text-align: left;">{{review.review_text}}</p>
       </div>
     </div>
   </div>

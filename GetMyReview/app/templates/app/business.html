@@ -2,13 +2,49 @@
 {% if business_id %}
   <p>Business: {{business_id}}</p>
   <p> Reviews: </p>
-  <ul>
+  <div class = "container">
+    <div class="row">
+      <div class = "col-lg-8 offset-lg-2">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Stars</th>
+              <th scope="col">User</th>
+              <th scope="col">Text</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in reviews %}
+              <tr>
+                <th scope="row">
+                  <a href="/app/review/{{r.review_id}}">
+                    {{r.stars}}
+                  </a>
+                </th>
+                <th scope="row">
+                  <a href="/app/user/{{r.user.user_id}}">
+                    {{r.user.user_id}}
+                  </a>
+                </th>
+                <th scope="row">
+                  <a href="/app/review/{{r.review_id}}">
+                    {{r.review_text|slice:":150"}}
+                  </a>
+                </th>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- <ul>
     {% for r in reviews%}
       <li>
         <a href="/app/review/{{r.review_id}}"> {{r.stars}}/5 {{r.user.user_id}} </a>
       </li>
     {% endfor %}
-  </ul>
+  </ul> -->
 {% else %}
   <p>Nonexistent business</p>
 {% endif %}
