@@ -81,3 +81,39 @@ def best_jacs(user_cats, all_rest_cats):
         rest_scores.append(jac_user_rest(user_cats, all_rest_cats[r]))
     best = np.flip(np.argsort(rest_scores))
     return best[:10]
+
+#run the LDA algorithm to generate topics
+#input: lump sum of text
+#output: list of lists, each list element is a category of words
+def LDA(text):
+    # running the comparison
+
+    from __future__ import print_function
+
+    from sklearn.feature_extraction.text import CountVectorizer
+    from sklearn.decomposition import LatentDirichletAllocation
+
+    n_features = 4000
+    n_topics = 10
+    n_top_words = 20
+
+    # dataset = []
+    # for elem in text:
+    #     dataset.append(elem)
+    dataset = text.split(' ')
+
+    tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2,
+                                    max_features=n_features,
+                                    stop_words='english')
+
+    # tf_vectorizer = CountVectorizer(max_features=n_features)
+
+    tf = tf_vectorizer.fit_transform(dataset)
+
+    lda = LatentDirichletAllocation(n_components=n_topics, max_iter=20,
+                                    learning_method='online',
+                                    learning_offset=50.)
+
+    lda.fit(tf)
+
+    tf_feature_names = tf_vectorizer.get_feature_names()
