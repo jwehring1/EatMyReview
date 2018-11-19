@@ -31,7 +31,8 @@ def get_sorted_users_by_reviews():
 
 # similarity between one category from user and one category from restaurant
 # each category is provided as a list
-def jac_sim(user_cat, rest_cat):
+#returns a single numeric score 0<=score<=1
+def jac_cat_cat(user_cat, rest_cat):
     # intersection starts as 0
     inters_mag = 0
     # union starts as size of all terms in user_cat
@@ -44,3 +45,32 @@ def jac_sim(user_cat, rest_cat):
         else:
             #new term
             inters_mag += 1
+
+    if (union_mag == 0):
+        #don't divide by 0
+        return 0
+    else:
+        return (inters_mag / union_mag)
+
+#similarity between the categories of a user and a restaurant
+# each input provided as list of categories (each entry is a list
+# containing the category's words
+#output is a single score, the highest score between one of the user's
+# categpries and one of the rest cats
+def jac_user_rest(user_cats, rest_cats):
+    max_jac = 0
+    for i in range(0, len(user_cats)):
+        for j in range(0, len(rest_cats)):
+            temp_score = jac_singles(user_cats[i], rest_cats[j])
+            if temp_score > max_jac:
+                temp_score = max_jac
+    return max_jac
+
+#find the best restaurants to recommend
+#gives the best 10 based from Jaccard similarity between LDA categories
+# of the user and all restaurants
+#input: list of user cats, each entry is a list of words; list of restaurants, each entry is a list of
+# cats, each entry is a list of words
+#output: list of 10 restaurant IDs that are best matches (0=best)
+def best_jacs(user_cats, rest_cats):
+    rest_scores = []
