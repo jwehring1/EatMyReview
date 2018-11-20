@@ -54,8 +54,8 @@ def recommendations(request, id ):
 
     #make list of rest_IDs
     rest_ID_list = []
-    for r in Review:
-        rid = r.business_id #this will probably fail :/
+    for r in Review.objects.all():
+        rid = r.business_id 
         if rid not in rest_ID_list:
             rest_ID_list.append(rid)
 

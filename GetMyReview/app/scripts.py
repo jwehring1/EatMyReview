@@ -102,17 +102,18 @@ def LDA(text):
     tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2,
                                     max_features=n_features,
                                     stop_words='english')
-
+    print("Vectorized.")
     # tf_vectorizer = CountVectorizer(max_features=n_features)
 
     tf = tf_vectorizer.fit_transform(dataset)
 
+    print("Creating LDA... ", end="")
     lda = LatentDirichletAllocation(n_components=n_topics, max_iter=20,
                                     learning_method='online',
                                     learning_offset=50.)
-
+    print("done. \nFitting. This could take awhile... ", end="")
     lda.fit(tf)
-
+    print("done.")
     tf_feature_names = tf_vectorizer.get_feature_names()
     cats = []
 
