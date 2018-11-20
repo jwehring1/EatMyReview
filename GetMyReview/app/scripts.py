@@ -93,7 +93,7 @@ def LDA(text):
     print("Executing LDA")
     # running the comparison
 
-    n_features = 4000
+    n_features = 1000
     n_topics = 10
     n_top_words = 3
 
