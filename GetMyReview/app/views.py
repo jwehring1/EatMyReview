@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import User,Review
-from app.scripts import get_sorted_users_by_reviews
+from app.scripts import get_sorted_users_by_reviews,LDA,best_jacs
+
 
 def index(request):
     # user_list = User.objects.all()
@@ -41,6 +42,39 @@ def business_detail(request, business_id):
 def recommendations(request, id ):
     template = loader.get_template('app/recommendations.html')
     r = Review.objects.all()
+
+    usr = User.objects.filter(user_id=id)[0]
+
+    seperator = " "
+    all_user_revs = []
+    for rev in usr.review_set.all():
+        all_user_revs.append(rev['text'])
+    all_user_revs_str = seperator.join(all_user_revs)
+    user_cats = LDA(all_user_revs_str)
+
+    #make list of rest_IDs
+    rest_ID_list = []
+    for r in Review:
+        rid = r['business_id'] #this will probably fail :/
+        if rid not in rest_ID_list:
+            rest_ID_list.append(rid)
+
+    rest_rev_strs = []
+    for rest in rest_ID_list:
+        all_rest_revs = []
+        for rev in Review.objects.filter(business_id=rest):
+            all_rest_revs.append(rev['text'])
+        rest_str = seperator.join(all_user_revs)
+        rest_rev_strs.append(rest_str)
+
+    rest_cats = []
+    for r in rest_rev_strs:
+        rest_cats.append(LDA(r))
+
+    #list of indices wrt rest_cats for 10 best restaurant matches
+    #return this
+    best_rests = best_jacs(user_cats, rest_cats)
+
     context = {
         "reviews": r,
     }

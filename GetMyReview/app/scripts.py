@@ -124,3 +124,6 @@ def LDA(text):
                         for i in topic.argsort()[:-n_top_words - 1:-1]]))
 
     return (lda)
+
+
+def get_user_revs()
