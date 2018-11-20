@@ -48,14 +48,14 @@ def recommendations(request, id ):
     seperator = " "
     all_user_revs = []
     for rev in usr.review_set.all():
-        all_user_revs.append(rev['text'])
+        all_user_revs.append(rev.review_text)
     all_user_revs_str = seperator.join(all_user_revs)
     user_cats = LDA(all_user_revs_str)
 
     #make list of rest_IDs
     rest_ID_list = []
     for r in Review:
-        rid = r['business_id'] #this will probably fail :/
+        rid = r.business_id #this will probably fail :/
         if rid not in rest_ID_list:
             rest_ID_list.append(rid)
 
@@ -63,7 +63,7 @@ def recommendations(request, id ):
     for rest in rest_ID_list:
         all_rest_revs = []
         for rev in Review.objects.filter(business_id=rest):
-            all_rest_revs.append(rev['text'])
+            all_rest_revs.append(rev.review_text)
         rest_str = seperator.join(all_user_revs)
         rest_rev_strs.append(rest_str)
 

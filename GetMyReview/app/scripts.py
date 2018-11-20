@@ -90,6 +90,7 @@ def best_jacs(user_cats, all_rest_cats):
 #input: lump sum of text
 #output: list of lists, each list element is a category of words
 def LDA(text):
+    print("Executing LDA")
     # running the comparison
 
     n_features = 4000
