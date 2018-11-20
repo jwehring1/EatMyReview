@@ -1,4 +1,8 @@
+from __future__ import print_function
 from .models import User, Review
+
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.decomposition import LatentDirichletAllocation
 import numpy as np
 
 # sort users by how many reviews they've left
@@ -88,11 +92,6 @@ def best_jacs(user_cats, all_rest_cats):
 def LDA(text):
     # running the comparison
 
-    from __future__ import print_function
-
-    from sklearn.feature_extraction.text import CountVectorizer
-    from sklearn.decomposition import LatentDirichletAllocation
-
     n_features = 4000
     n_topics = 10
     n_top_words = 3
@@ -118,6 +117,6 @@ def LDA(text):
 
     for topic_idx, topic in enumerate(lda.components_):
         cats.append([tf_feature_names[i]
-                        for i in topic.argsort()[:-n_top_words - 1:-1]]))
+                        for i in topic.argsort()[:-n_top_words - 1:-1]])
 
     return (lda)
