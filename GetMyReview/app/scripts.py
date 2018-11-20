@@ -95,11 +95,8 @@ def LDA(text):
 
     n_features = 4000
     n_topics = 10
-    n_top_words = 20
+    n_top_words = 3
 
-    # dataset = []
-    # for elem in text:
-    #     dataset.append(elem)
     dataset = text.split(' ')
 
     tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2,
@@ -124,6 +121,3 @@ def LDA(text):
                         for i in topic.argsort()[:-n_top_words - 1:-1]]))
 
     return (lda)
-
-
-def get_user_revs()
