@@ -84,7 +84,7 @@ def best_jacs(user_cats, all_rest_cats):
     rest_scores = []
     for r in range(0, len(all_rest_cats)):
         rest_scores.append(jac_user_rest(user_cats, all_rest_cats[r]))
-    best = np.flip(np.argsort(rest_scores))
+    best = np.flip(np.argsort(rest_scores), axis=0)
     return best[:10]
 
 #run the LDA algorithm to generate topics

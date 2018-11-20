@@ -1,8 +1,13 @@
 {% include "site/menu.html "%}
-{% if reviews %}
+{% if business_ids %}
+  <p> Recommended businesses </p>
   <ul>
-    {% for r in reviews %}
-      <li> {{r.review_text}}</li>
+    {% for b in business_ids %}
+      <li>
+        <a href="/app/business/{{b}}">
+          {{b}}
+        </a>
+      </li>
     {% endfor %}
   </ul>
 {% else %}
