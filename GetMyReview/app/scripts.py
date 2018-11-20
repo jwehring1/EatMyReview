@@ -67,7 +67,7 @@ def jac_user_rest(user_cats, rest_cats):
     max_jac = 0
     for i in range(0, len(user_cats)):
         for j in range(0, len(rest_cats)):
-            temp_score = jac_singles(user_cats[i], rest_cats[j])
+            temp_score = jac_cat_cat(user_cats[i], rest_cats[j])
             if temp_score > max_jac:
                 temp_score = max_jac
     return max_jac
