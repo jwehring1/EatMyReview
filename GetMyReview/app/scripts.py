@@ -117,3 +117,10 @@ def LDA(text):
     lda.fit(tf)
 
     tf_feature_names = tf_vectorizer.get_feature_names()
+    cats = []
+
+    for topic_idx, topic in enumerate(lda.components_):
+        cats.append([tf_feature_names[i]
+                        for i in topic.argsort()[:-n_top_words - 1:-1]]))
+
+    return (lda)
