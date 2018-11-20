@@ -75,7 +75,9 @@ def recommendations(request, id ):
     #return this
     best_rests = best_jacs(user_cats, rest_cats)
 
+    business_ids = [rest_ID_list[i] for i in best_rests]
     context = {
         "reviews": r,
+        "business_ids" : business_ids,
     }
     return render(request, 'app/recommendations.html', context)

@@ -4,6 +4,7 @@ from .models import User, Review
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
 import numpy as np
+import math
 
 # sort users by how many reviews they've left
 # returns a list of tuples, with 0 being the user and 1 being the number of reviews
@@ -97,28 +98,37 @@ def LDA(text):
     n_topics = 10
     n_top_words = 3
 
-    dataset = text.split(' ')
-
-    tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2,
-                                    max_features=n_features,
-                                    stop_words='english')
-    print("Vectorized.")
-    # tf_vectorizer = CountVectorizer(max_features=n_features)
-
-    tf = tf_vectorizer.fit_transform(dataset)
-
-    print("Creating LDA... ", end="")
-    lda = LatentDirichletAllocation(n_components=n_topics, max_iter=20,
-                                    learning_method='online',
-                                    learning_offset=50.)
-    print("done. \nFitting. This could take awhile... ", end="")
-    lda.fit(tf)
-    print("done.")
-    tf_feature_names = tf_vectorizer.get_feature_names()
+##real LDA function
+    # dataset = text.split(' ')
+    #
+    # tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2,
+    #                                 max_features=n_features,
+    #                                 stop_words='english')
+    # print("Vectorized.")
+    # # tf_vectorizer = CountVectorizer(max_features=n_features)
+    #
+    # tf = tf_vectorizer.fit_transform(dataset)
+    #
+    # print("Creating LDA... ", end="")
+    # lda = LatentDirichletAllocation(n_components=n_topics, max_iter=20,
+    #                                 learning_method='online',
+    #                                 learning_offset=50.)
+    # print("done. \nFitting. This could take awhile... ", end="")
+    # lda.fit(tf)
+    # print("done.")
+    # tf_feature_names = tf_vectorizer.get_feature_names()
     cats = []
 
-    for topic_idx, topic in enumerate(lda.components_):
-        cats.append([tf_feature_names[i]
-                        for i in topic.argsort()[:-n_top_words - 1:-1]])
+##also real LDA function
+    # for topic_idx, topic in enumerate(lda.components_):
+    #     cats.append([tf_feature_names[i]
+    #                     for i in topic.argsort()[:-n_top_words - 1:-1]])
 
-    return (lda)
+    text_split = text.split(' ')
+    num_words = len(text_split)
+    size = math.floor(num_words/n_topics)
+    for i in range(0, n_topics):
+        start = i*size
+        cats.append(text_split[start:start+size])
+
+    return (cats)
