@@ -24,17 +24,6 @@ def get_sorted_users_by_reviews():
     #return only the list of users
     return [x[0] for x in users]
 
-
-#create LDA categories for the dummy user
-
-
-#Jaccard similarity between each LDA category for the user
-# and each LDA category for each restaurant
-
-
-#take the highest similarity scores and return these as the ranked results
-
-
 # similarity between one category from user and one category from restaurant
 # each category is provided as a list
 #returns a single numeric score 0<=score<=1
@@ -99,36 +88,39 @@ def LDA(text):
     n_top_words = 3
 
 ##real LDA function
-    # dataset = text.split(' ')
-    #
-    # tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2,
-    #                                 max_features=n_features,
-    #                                 stop_words='english')
-    # print("Vectorized.")
-    # # tf_vectorizer = CountVectorizer(max_features=n_features)
-    #
-    # tf = tf_vectorizer.fit_transform(dataset)
-    #
-    # print("Creating LDA... ", end="")
-    # lda = LatentDirichletAllocation(n_components=n_topics, max_iter=20,
-    #                                 learning_method='online',
-    #                                 learning_offset=50.)
-    # print("done. \nFitting. This could take awhile... ", end="")
-    # lda.fit(tf)
-    # print("done.")
-    # tf_feature_names = tf_vectorizer.get_feature_names()
+    dataset = text.split(' ')
+
+    tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2,
+                                    max_features=n_features,
+                                    stop_words='english')
+    print("Vectorized.")
+    # tf_vectorizer = CountVectorizer(max_features=n_features)
+
+    tf = tf_vectorizer.fit_transform(dataset)
+
+    print("Creating LDA... ", end="")
+    lda = LatentDirichletAllocation(n_components=n_topics, max_iter=20,
+                                    learning_method='online',
+                                    learning_offset=50.)
+    print("done. \nFitting. This could take awhile... ", end="")
+    lda.fit(tf)
+    print("done.")
+    tf_feature_names = tf_vectorizer.get_feature_names()
     cats = []
 
 ##also real LDA function
-    # for topic_idx, topic in enumerate(lda.components_):
-    #     cats.append([tf_feature_names[i]
-    #                     for i in topic.argsort()[:-n_top_words - 1:-1]])
+    for topic_idx, topic in enumerate(lda.components_):
+        cats.append([tf_feature_names[i]
+            for i in topic.argsort()[:-n_top_words - 1:-1]])
 
-    text_split = text.split(' ')
-    num_words = len(text_split)
-    size = math.floor(num_words/n_topics)
-    for i in range(0, n_topics):
-        start = i*size
-        cats.append(text_split[start:start+size])
+
+    #####Dummy LDA function - splits each string into equal sized chunks
+    ##### with no LDA applied
+    # text_split = text.split(' ')
+    # num_words = len(text_split)
+    # size = math.floor(num_words/n_topics)
+    # for i in range(0, n_topics):
+    #     start = i*size
+    #     cats.append(text_split[start:start+size])
 
     return (cats)

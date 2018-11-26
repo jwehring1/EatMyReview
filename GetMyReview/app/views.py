@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import User,Review
 from app.scripts import get_sorted_users_by_reviews,LDA,best_jacs
+import pickle
 
 
 def index(request):
@@ -43,6 +44,8 @@ def recommendations(request, id ):
     template = loader.get_template('app/recommendations.html')
     r = Review.objects.all()
 
+    RUN_REST_LDA = True
+
     usr = User.objects.filter(user_id=id)[0]
 
     seperator = " "
@@ -59,17 +62,31 @@ def recommendations(request, id ):
         if rid not in rest_ID_list:
             rest_ID_list.append(rid)
 
-    rest_rev_strs = []
-    for rest in rest_ID_list:
-        all_rest_revs = []
-        for rev in Review.objects.filter(business_id=rest):
-            all_rest_revs.append(rev.review_text)
-        rest_str = seperator.join(all_user_revs)
-        rest_rev_strs.append(rest_str)
-
     rest_cats = []
-    for r in rest_rev_strs:
-        rest_cats.append(LDA(r))
+    if (RUN_REST_LDA):
+        #create strings combining all revs for each rest
+        rest_rev_strs = []
+        for rest in rest_ID_list:
+            all_rest_revs = []
+            for rev in Review.objects.filter(business_id=rest):
+                all_rest_revs.append(rev.review_text)
+            #combine revs with a space
+            rest_str = seperator.join(all_user_revs)
+            rest_rev_strs.append(rest_str)
+        #run LDA on each combined string
+        for r in rest_rev_strs:
+            rest_cats.append(LDA(r))
+
+        #store to file
+        f = open('rest_cats.pckl', 'wb')
+        pickle.dump(rest_cats, f)
+        f.close()
+
+    else:
+        f = open('rest_cats.pckl', 'rb')
+        rest_cats = pickle.load(f)
+        f.close()
+
 
     #list of indices wrt rest_cats for 10 best restaurant matches
     #return this
