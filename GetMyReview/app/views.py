@@ -55,8 +55,7 @@ def recommendations(request, id ):
     usr = User.objects.filter(user_id=id)[0]
 
     seperator = " "
-	
-	rest_cats = []
+    rest_cats = []
     ### Restaurant LDA
     if (RUN_REST_LDA):
         #create strings combining all revs for each rest
@@ -86,29 +85,29 @@ def recommendations(request, id ):
 
     ### User LDA
     all_user_revs = []
-	business_ids = []
+    business_ids = []
     for rev in usr.review_set.all():
         if (rev.stars > 2.5):
             all_user_revs.append(rev.review_text)
-	if not all_user_revs:
+    if not all_user_revs:
 		#if not empty list
-		all_user_revs_str = seperator.join(all_user_revs)
-		user_cats = LDA(all_user_revs_str)
+        all_user_revs_str = seperator.join(all_user_revs)
+        user_cats = LDA(all_user_revs_str)
 	
 
 		#make list of rest_IDs
-		rest_ID_list = []
-		for r in Review.objects.all():
-			rid = r.business_id 
-			if rid not in rest_ID_list:
-				rest_ID_list.append(rid)
+        rest_ID_list = []
+        for r in Review.objects.all():
+            rid = r.business_id 
+            if rid not in rest_ID_list:
+                rest_ID_list.append(rid)
 
 	
 		#list of indices wrt rest_cats for 10 best restaurant matches
 		#return this
-		best_rests = best_jacs(user_cats, rest_cats)
+        best_rests = best_jacs(user_cats, rest_cats)
 
-		business_ids = [rest_ID_list[i] for i in best_rests]
+        business_ids = [rest_ID_list[i] for i in best_rests]
 
 		
     context = {
