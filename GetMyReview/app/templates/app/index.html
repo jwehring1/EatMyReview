@@ -12,8 +12,8 @@
   <h3 id="Phrase">Post Reviews and get instant recommendations!</h3>
 </div>
 
-<h4 id= "database">Select a user to get started!</h4>
-
+<h4 id= "Center">Select a user to get started!</h4>
+<a href="#top" id="bottom"></a>
 <div class = "container">
 {% if user_list %}
 <h1 id = "database">User Database</h1>
@@ -23,8 +23,8 @@
 				<a id="link" href="/app/user/{{user.user_id}}/">{{user.user_id}}</a>
 			</div>
 		{% endfor %}
-	</div>
 {% else %}
   <p> No users found :( </p>
 
 {% endif %}
+</div>
