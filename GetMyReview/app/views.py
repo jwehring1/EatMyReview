@@ -48,30 +48,15 @@ def business_detail(request, business_id):
 
 def recommendations(request, id ):
     template = loader.get_template('app/recommendations.html')
-    r = Review.objects.all()
+    r_all = Review.objects.all()
 
     RUN_REST_LDA = True
 
     usr = User.objects.filter(user_id=id)[0]
 
     seperator = " "
-
-    ### User LDA
-    all_user_revs = []
-    for rev in usr.review_set.all():
-        if (rev.stars > 2.5):
-            all_user_revs.append(rev.review_text)
-    all_user_revs_str = seperator.join(all_user_revs)
-    user_cats = LDA(all_user_revs_str)
-
-    #make list of rest_IDs
-    rest_ID_list = []
-    for r in Review.objects.all():
-        rid = r.business_id 
-        if rid not in rest_ID_list:
-            rest_ID_list.append(rid)
-
-    rest_cats = []
+	
+	rest_cats = []
     ### Restaurant LDA
     if (RUN_REST_LDA):
         #create strings combining all revs for each rest
@@ -97,15 +82,37 @@ def recommendations(request, id ):
         f = open('rest_cats.pckl', 'rb')
         rest_cats = pickle.load(f)
         f.close()
+		
 
+    ### User LDA
+    all_user_revs = []
+	business_ids = []
+    for rev in usr.review_set.all():
+        if (rev.stars > 2.5):
+            all_user_revs.append(rev.review_text)
+	if not all_user_revs:
+		#if not empty list
+		all_user_revs_str = seperator.join(all_user_revs)
+		user_cats = LDA(all_user_revs_str)
+	
 
-    #list of indices wrt rest_cats for 10 best restaurant matches
-    #return this
-    best_rests = best_jacs(user_cats, rest_cats)
+		#make list of rest_IDs
+		rest_ID_list = []
+		for r in Review.objects.all():
+			rid = r.business_id 
+			if rid not in rest_ID_list:
+				rest_ID_list.append(rid)
 
-    business_ids = [rest_ID_list[i] for i in best_rests]
+	
+		#list of indices wrt rest_cats for 10 best restaurant matches
+		#return this
+		best_rests = best_jacs(user_cats, rest_cats)
+
+		business_ids = [rest_ID_list[i] for i in best_rests]
+
+		
     context = {
-        "reviews": r,
+        "reviews": r_all,
         "business_ids" : business_ids,
     }
     return render(request, 'app/recommendations.html', context)
