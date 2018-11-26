@@ -13,10 +13,11 @@
 </div>
 <div class = "container">
 {% if user_list %}
+<h1 id = "database">User Database</h1>
 	<div id = "userRow" class="row">
 		{% for user in user_list%}
 			<div id="userItem" class="col-lg-4 col-md-6 col-sm-12">
-				<a href="/app/user/{{user.user_id}}/">{{user.user_id}}</a>
+				<a id="link" href="/app/user/{{user.user_id}}/">{{user.user_id}}</a>
 			</div>
 		{% endfor %}
 	</div>

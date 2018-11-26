@@ -49,18 +49,39 @@ body, input, select, textarea {
 }
 
 
-#userRow #userItem:nth-child(3n){
-  background-color:#F172A1;
+#userRow #userItem:nth-child(18n+2), #userRow #userItem:nth-child(18n+3), #userRow #userItem:nth-child(18n+6), #userRow #userItem:nth-child(18n+13), #userRow #userItem:nth-child(18n+16), #userRow #userItem:nth-child(18n+17){
+  background-color:#728CA3;
 }
-
-#userRow #userItem:nth-child(3n+1){
-  background-color:#F0EBF4;
+#userRow #userItem:nth-child(18n+1), #userRow #userItem:nth-child(18n+4), #userRow #userItem:nth-child(18n+8), #userRow #userItem:nth-child(18n+5), #userRow #userItem:nth-child(18n+9), #userRow #userItem:nth-child(18n+12){
+  background-color:#2A3457;
 }
-#userRow #userItem:nth-child(3n+2){
+#userRow #userItem:nth-child(18n+7), #userRow #userItem:nth-child(18n+10), #userRow #userItem:nth-child(18n+11), #userRow #userItem:nth-child(18n+14), #userRow #userItem:nth-child(18n+15), #userRow #userItem:nth-child(18n+18){
   background-color:#B39BC8;
 }
+#userRow #userItem:nth-child(18n+2):hover, #userRow #userItem:nth-child(18n+3):hover, #userRow #userItem:nth-child(18n+6):hover, #userRow #userItem:nth-child(18n+13):hover, #userRow #userItem:nth-child(18n+16):hover, #userRow #userItem:nth-child(18n+17):hover{
+  transition: background-color .6s ease;
+  background-color:#4F728E;
+}
+#userRow #userItem:nth-child(18n+1):hover, #userRow #userItem:nth-child(18n+4):hover, #userRow #userItem:nth-child(18n+8):hover, #userRow #userItem:nth-child(18n+5):hover, #userRow #userItem:nth-child(18n+9):hover, #userRow #userItem:nth-child(18n+12):hover{
+  transition: background-color .6s ease;
+  background-color:#000D29;
+}
+#userRow #userItem:nth-child(18n+7):hover, #userRow #userItem:nth-child(18n+10):hover, #userRow #userItem:nth-child(18n+11):hover, #userRow #userItem:nth-child(18n+14):hover, #userRow #userItem:nth-child(18n+15):hover, #userRow #userItem:nth-child(18n+18):hover{
+  transition: background-color .6s ease;
+  background-color:#9a7ab6;
+}
 
+a {
+	color: #111524;
+}
 
+#link {
+	color: #D5D5D5;
+}
+
+#database {
+	text-align: center;
+}
 
 p {
 	text-align: center;
@@ -92,8 +113,8 @@ p {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	-webkit-animation-duration: 7s;
-            animation-duration: 7s;
+	-webkit-animation-duration: 5s;
+            animation-duration: 5s;
     -webkit-animation-fill-mode: both;
             animation-fill-mode: both;
 }
@@ -104,8 +125,8 @@ p {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	-webkit-animation-duration: 15s;
-            animation-duration: 15s;
+	-webkit-animation-duration: 10s;
+            animation-duration: 10s;
     -webkit-animation-fill-mode: both;
             animation-fill-mode: both;
 }
@@ -129,6 +150,163 @@ p {
     min-width: 100%;
     min-height: 100%;
 }
+
+
+
+
+
+/*Button, will clean up*/
+.boton {
+        width: 300px;
+        height: 50px;
+        margin: 20px auto;
+        display: block;
+        position: relative;
+    }
+    
+    .botontext {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        text-align: center;
+        line-height: 50px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+    
+    .twist {
+        display: block;
+        height: 100%;
+        width: 25%;
+        position: relative;
+        float: left;
+        margin-left: -4px;
+    }
+    
+    .twist:before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        background: #34587f;
+        bottom: 100%;
+        position: absolute;
+        transform-origin: center bottom 0px; 
+        transform: matrix3d(1, 0, 0, 0, 
+                            0, 0, -1, -0.003, 
+                            0, 1, 0, 0, 
+                            0, 0, 0, 1);
+        
+-webkit-transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); 
+   -moz-transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); 
+     -o-transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); 
+        transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); /* custom */
+    }
+    
+    .twist:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        top: 100%;
+        height: 100%;
+        background: #253F5B;
+        transform-origin: center top 0px;
+        transform: matrix3d(1, 0, 0, 0, 
+                            0, 1, 0, 0, 
+                            0, 0, 1, -0.003, 
+                            0, -50, 0, 1);
+        
+-webkit-transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); 
+   -moz-transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); 
+     -o-transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); 
+        transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); /* custom */
+    }
+    
+    .boton:hover .twist:before {
+        background: #fff;
+        transform: matrix3d(1, 0, 0, 0, 
+                            0, 1, 0, 0, 
+                            0, 0, 1, 0.003, 
+                            0, 50, 0, 1);
+    }
+    
+    .boton:hover .twist:after {
+        background: #dedae1;
+        transform: matrix3d(1, 0, 0, 0, 
+                            0, 0, -1, 0.003, 
+                            0, 1, 0, 0, 
+                            0, 0, 0, 1);
+    }
+
+    .boton .twist:nth-of-type(1) {
+        margin-left: 0;
+    }
+    
+    .boton .twist:nth-of-type(1):before,
+    .boton .twist:nth-of-type(1):after {
+        transition-delay: 0s;
+    }
+    
+    .boton .twist:nth-of-type(2):before,
+    .boton .twist:nth-of-type(2):after {
+        transition-delay: 0.1s;
+    }
+    
+    .boton .twist:nth-of-type(3):before,
+    .boton .twist:nth-of-type(3):after {
+        transition-delay: 0.2s;
+    }
+    
+    .boton .twist:nth-of-type(4):before,
+    .boton .twist:nth-of-type(4):after {
+        transition-delay: 0.3s;
+    }
+    
+    .boton .botontext:nth-of-type(1) {
+        color: #3d3b40;
+        bottom: 100%;
+        transform-origin: center bottom 0px; 
+        transform: matrix3d(1, 0, 0, 0, 
+                            0, 0, -1, -0.003, 
+                            0, 1, 0, 0, 
+                            0, 0, 0, 1);
+        
+-webkit-transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); 
+   -moz-transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); 
+     -o-transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); 
+        transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); /* custom */
+    }
+    
+    .boton:hover .botontext:nth-of-type(1) {
+        transform: matrix3d(1, 0, 0, 0, 
+                            0, 1, 0, 0, 
+                            0, 0, 1, 0.003, 
+                            0, 50, 0, 1);
+    }
+    
+    .boton .botontext:nth-of-type(2) {
+        color: #fff;
+        top: 100%;
+        transform-origin: center top 0px;
+        transform: matrix3d(1, 0, 0, 0, 
+                            0, 1, 0, 0, 
+                            0, 0, 1, -0.003, 
+                            0, -50, 0, 1);
+        
+-webkit-transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); 
+   -moz-transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); 
+     -o-transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); 
+        transition: all 500ms cubic-bezier(0.970, 0.000, 0.395, 0.995); /* custom */
+    }
+    
+    .boton:hover .botontext:nth-of-type(2) {
+        transform: matrix3d(1, 0, 0, 0, 
+                            0, 0, -1, 0.003, 
+                            0, 1, 0, 0, 
+                            0, 0, 0, 1);
+    }
+
 </style>
 
 <ul id=menu>
