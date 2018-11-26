@@ -53,7 +53,7 @@ def recommendations(request, id ):
     ### User LDA
     all_user_revs = []
     for rev in usr.review_set.all():
-        if (rev.rating > 2.5):
+        if (rev.stars > 2.5):
             all_user_revs.append(rev.review_text)
     all_user_revs_str = seperator.join(all_user_revs)
     user_cats = LDA(all_user_revs_str)
@@ -73,7 +73,7 @@ def recommendations(request, id ):
         for rest in rest_ID_list:
             all_rest_revs = []
             for rev in Review.objects.filter(business_id=rest):
-                if(rev.rating > 2.5):
+                if(rev.stars > 2.5):
                     all_rest_revs.append(rev.review_text)
             #combine revs with a space
             rest_str = seperator.join(all_user_revs)
