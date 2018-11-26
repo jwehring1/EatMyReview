@@ -1,15 +1,14 @@
 {% include "site/menu.html "%}
 {% if business_ids %}
-  <p> Recommended businesses </p>
-  <ul>
-    {% for b in business_ids %}
-      <li>
-        <a href="/app/business/{{b}}">
-          {{b}}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+  <div class = "container">
+<h1 id = "database">Recommended Businesses</h1>
+	<div id = "userRow" class="row">
+		{% for b in business_ids %}
+			<div id="userItem" class="col-lg-4 col-md-6 col-sm-12">
+				<a id="link" href="/app/business/{{b}}">{{b}}</a>
+			</div>
+		{% endfor %}
+	</div>
 {% else %}
   <p>No reviews found</p>
 {% endif %}

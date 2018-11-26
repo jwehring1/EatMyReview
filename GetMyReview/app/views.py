@@ -15,6 +15,12 @@ def index(request):
     }
     return render(request, 'app/index.html', context)
 
+def database(request):
+	context = {
+        "user_list":user_list,
+    }
+	return(request, 'app/database.html', context)
+
 def user_profile(request, id):
     usr = User.objects.filter(user_id=id)[0]
     template = loader.get_template('app/profile.html')
