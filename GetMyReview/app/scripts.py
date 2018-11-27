@@ -88,15 +88,20 @@ def LDA(text):
     n_top_words = 3
 
 ##real LDA function
+    if text == "":
+        return [[]]
     dataset = text.split(' ')
 
-    tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2,
+    tf_vectorizer = CountVectorizer(max_df=0.95, min_df=1,
                                     max_features=n_features,
                                     stop_words='english')
     print("Vectorized.")
     # tf_vectorizer = CountVectorizer(max_features=n_features)
 
-    tf = tf_vectorizer.fit_transform(dataset)
+    try:
+        tf = tf_vectorizer.fit_transform(dataset)
+    except:
+        return [[]]
 
     print("Creating LDA... ", end="")
     lda = LatentDirichletAllocation(n_components=n_topics, max_iter=20,

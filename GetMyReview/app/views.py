@@ -48,11 +48,10 @@ def business_detail(request, business_id):
     return render(request, 'app/business.html', context)
 
 def recommendations(request, id ):
-    print("in reccos")
     template = loader.get_template('app/recommendations.html')
     r_all = Review.objects.all()
 
-    file_path = "rest_cats.pckl"
+    file_path = "rest_cats_large_db.pckl"
     if os.path.isfile(file_path):
         print("Restaurant LDAs EXIST")
         RUN_REST_LDA = False
@@ -67,6 +66,9 @@ def recommendations(request, id ):
         if rid not in rest_ID_list:
             rest_ID_list.append(rid)
 
+    #used to join reviews into combined strings
+    seperator = " "
+
     rest_cats = []
     ### Restaurant LDA
     if (RUN_REST_LDA):
@@ -78,25 +80,23 @@ def recommendations(request, id ):
                 if (rev.stars > 2.5):
                     all_rest_revs.append(rev.review_text)
             # combine revs with a space
-            rest_str = seperator.join(all_user_revs)
+            rest_str = seperator.join(all_rest_revs)
             rest_rev_strs.append(rest_str)
         # run LDA on each combined string
         for r in rest_rev_strs:
             rest_cats.append(LDA(r))
 
         # store to file
-        f = open('rest_cats.pckl', 'wb')
+        f = open('rest_cats_large_db.pckl', 'wb')
         pickle.dump(rest_cats, f)
         f.close()
 
     else:
-        f = open('rest_cats.pckl', 'rb')
+        f = open('rest_cats_large_db.pckl', 'rb')
         rest_cats = pickle.load(f)
         f.close()
 
     usr = User.objects.filter(user_id=id)[0]
-
-    seperator = " "
 
     ### User LDA
     all_user_revs = []
@@ -107,7 +107,6 @@ def recommendations(request, id ):
     l = len(all_user_revs)
     if l>0:
         #not an empty list
-        print(all_user_revs)
         all_user_revs_str = seperator.join(all_user_revs)
         user_cats = LDA(all_user_revs_str)
 
