@@ -28,6 +28,9 @@ def get_sorted_users_by_reviews():
 # each category is provided as a list
 #returns a single numeric score 0<=score<=1
 def jac_cat_cat(user_cat, rest_cat):
+    if (len(user_cat) == 0) or (len(rest_cat) == 0):
+        return 0
+
     # intersection starts as 0
     inters_mag = 0
     # union starts as size of all terms in user_cat
@@ -74,6 +77,10 @@ def best_jacs(user_cats, all_rest_cats):
     for r in range(0, len(all_rest_cats)):
         rest_scores.append(jac_user_rest(user_cats, all_rest_cats[r]))
     best = np.flip(np.argsort(rest_scores), axis=0)
+    best_checked = []
+    for i in best:
+        if rest_scores[i] > 0:
+            best_checked.append(i)
     return best[:10]
 
 #run the LDA algorithm to generate topics
