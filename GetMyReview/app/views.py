@@ -48,12 +48,13 @@ def business_detail(request, business_id):
     return render(request, 'app/business.html', context)
 
 def recommendations(request, id ):
+    print("in reccos")
     template = loader.get_template('app/recommendations.html')
-    r = Review.objects.all()
+    r_all = Review.objects.all()
 
     file_path = "rest_cats.pckl"
     if os.path.isfile(file_path):
-        print("Resaturant LDAs EXIST")
+        print("Restaurant LDAs EXIST")
         RUN_REST_LDA = False
     else:
         print("Run restaurant LDAs")
@@ -103,8 +104,10 @@ def recommendations(request, id ):
     for rev in usr.review_set.all():
         if (rev.stars > 2.5):
             all_user_revs.append(rev.review_text)
-    if not all_user_revs:
+    l = len(all_user_revs)
+    if l>0:
         #not an empty list
+        print(all_user_revs)
         all_user_revs_str = seperator.join(all_user_revs)
         user_cats = LDA(all_user_revs_str)
 
@@ -113,9 +116,9 @@ def recommendations(request, id ):
         best_rests = best_jacs(user_cats, rest_cats)
 
         business_ids = [rest_ID_list[i] for i in best_rests]
-        
+
     context = {
-        "reviews": r,
+        "reviews": r_all,
         "business_ids" : business_ids,
     }
     return render(request, 'app/recommendations.html', context)
