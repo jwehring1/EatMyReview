@@ -20,4 +20,4 @@ MORE INFORMATION FOUND ON THE WIKI!!!
 
 <br />
 <b>Description</b><br />
-Eat My Review is Yelp recommender system that recommends restaurants based on a user's past reviews. Latent Dirichlet Allocation (or LDA) was the algorithm used to find a sample of the user's recommended restaurants. The application is written in python using the Django framework.
+Eat My Review is Yelp recommender system that recommends restaurants based on a user's past reviews. Latent Dirichlet Allocation (or LDA) was the algorithm used to find a sample of the user's recommended restaurants. The application is written in Python using the Django framework.
